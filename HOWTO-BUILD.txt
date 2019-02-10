@@ -1,0 +1,23 @@
+0. Environment
+- ANT_HOME adalah environment variable yang berisi direktor di mana Apache ANT diinstall
+- Sangat disarankan menggunakan Apache ANT versi 1.9
+
+1. JDK
+Harus menggunakan JDK versi 1.7
+
+2. Setting Configuration
+- Buka file 'src/main/resources/config.properties'
+- Block Email Configuration adalah konfigurasi SMTP yang digunakan
+- Block Active Directory Configuration adalah konfigurasi Active Directory yang digunakan untuk back office login
+- Sesuaikan nilai di block Webstatement App server configuration
+- email_attach_dir diisi dengan nama folder dimana file-file attachment untuk estatement email diletakkan
+
+3. Clean Distribution
+Jalankan perintah '%ANT_HOME%\bin\ant clean'
+
+4. Build EAR
+Jalankan perintah '%ANT_HOME%\bin\ant build-ear'
+
+5. Trouble shoots
+- Bila terjadi gagal compile pastikan Java Compiler yang digunakan untuk compile adalah JDK 1.7
+- Bila telah menggunakan JDK 1.7 maka jalan target clean terlebih dahulu baru kemudian target build-ear

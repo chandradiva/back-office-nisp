@@ -1,0 +1,168 @@
+.b-google-map {
+  position: relative; }
+
+@media screen and (min-width: 1024px) {
+  .b-google-map--fix-height .b-google-map__map-view {
+    min-height: 650px; } }
+
+.b-google-map__map-view {
+  min-height: 500px; }
+  @media screen and (max-width: 1024px) {
+    .b-google-map__map-view {
+      min-height: 600px; } }
+  @media screen and (max-width: 767px) {
+    .b-google-map__map-view {
+      min-height: 300px; } }
+
+.b-google-map__info-window {
+  padding: 10px 0; }
+  @media (max-width: 1024px) {
+    .b-google-map__info-window {
+      max-width: 310px; } }
+
+.b-google-map__info-window-address, .b-google-map__info-window-image {
+  padding: 0; }
+
+.b-google-map__info-window-address ul li {
+  margin-bottom: 20px; }
+.b-google-map__info-window-address ul li:last-child {
+  margin-bottom: 0; }
+
+.b-google-map__info-window-address-title {
+  margin-top: 3px;
+  margin-bottom: 5px; }
+
+.f-google-map__info-window-address-title {
+  color: #e9682e;
+  font-weight: 700;
+  text-transform: uppercase; }
+  .f-google-map__info-window-address-title:hover {
+    cursor: pointer; }
+
+.b-google-map__info-window-address-icon {
+  height: 44px;
+  width: 44px;
+  background-color: #e9682e;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-right: 10px; }
+  .b-google-map__info-window-address-icon .fa {
+    color: white;
+    vertical-align: middle;
+    line-height: 44px;
+    font-size: 21px; }
+  .b-google-map__info-window-address-icon:hover {
+    cursor: pointer; }
+
+.b-goggle-map_info-window-estate {
+  padding-left: 17px;
+  min-height: 315px; }
+  @media (max-width: 640px) {
+    .b-goggle-map_info-window-estate {
+      padding-left: 0;
+      max-width: 270px; } }
+
+.b-goggle-map_info-window-estate-image {
+  margin-bottom: 20px; }
+  .b-goggle-map_info-window-estate-image img {
+    width: 275px; }
+  @media (max-width: 640px) {
+    .b-goggle-map_info-window-estate-image img {
+      width: 270px; } }
+
+.f-google-map__info-window-estate-title {
+  font-size: 1.53846em;
+  line-height: 1;
+  color: #e9682e; }
+
+.f-google-map__info-window-estate-description {
+  font-size: 0.92308em;
+  line-height: 1.2; }
+
+.b-google-map__info-window-estate-details {
+  padding: 10px 0;
+  margin: 5px 0;
+  border-top: 2px solid #dddddd;
+  border-bottom: 2px solid #dddddd; }
+  .b-google-map__info-window-estate-details .b-info-group ul {
+    margin: 0; }
+  .b-google-map__info-window-estate-details .fa {
+    color: #989898; }
+
+.b-google-map__title {
+  position: relative;
+  padding: 20px 0; }
+  @media screen and (min-width: 480px) {
+    .b-google-map__title {
+      padding: 40px 0; } }
+  .b-google-map__title:after {
+    top: 100%;
+    left: 50%;
+    border: 18px solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    border-top-color: #e9682e;
+    margin-left: -18px; }
+
+.f-google-map__title {
+  font-size: 2.76923em;
+  line-height: 1.2;
+  color: white;
+  background-color: #e9682e;
+  text-transform: uppercase;
+  vertical-align: middle; }
+
+.f-google-map__marker-label {
+  color: white;
+  font-size: 1.07692em;
+  line-height: 1.2;
+  background-color: #666666;
+  text-align: center;
+  white-space: nowrap;
+  padding: 10px;
+  margin-left: 20px;
+  border-radius: 2px;
+  position: relative;
+  top: -75px;
+  left: -50%; }
+
+.f-google-map__marker-label {
+  color: white;
+  font-size: 1.07692em;
+  line-height: 1.2;
+  background-color: #666666;
+  text-align: center;
+  white-space: nowrap;
+  padding: 10px;
+  margin-left: 20px;
+  border-radius: 2px;
+  position: relative;
+  top: -75px;
+  left: -50%; }
+  .f-google-map__marker-label:after {
+    top: 100%;
+    left: 50%;
+    border: 5px solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-top-color: #666666;
+    margin-left: -2px; }
+
+.b-google-map__info-office {
+  min-height: 70px;
+  padding-left: 15px;
+  width: 140px; }
+  .b-google-map__info-office h4 {
+    margin-bottom: 5px; }
+
+.f-google-map__info-office {
+  text-transform: uppercase; }
+  .f-google-map__info-office small {
+    color: #515151; }

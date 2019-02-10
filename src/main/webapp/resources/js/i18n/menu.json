@@ -1,0 +1,59 @@
+{"tableUserProfileAccess":
+	{
+		"mnu.header.general.info":
+			{
+				"mnu.item.subhead.bill.org.list":{
+					"content":[
+						"1201|mnu.item.subhead.bill.org.list|DUMMY URL|false|false|false|false|false|false|false|false|false"
+					]},
+				"mnu.item.subhead.bank.list":{
+					"content": [
+						"1101|mnu.item.subhead.tele.trf|DUMMY URL|false|false|false|false|false|false|false|false|false",
+						"1102|mnu.item.subhead.interbank|DUMMY URL|false|false|false|false|false|false|false|false|false",
+						"1103|mnu.item.subhead.online.trf|DUMMY URL|false|false|false|false|false|false|false|false|false"
+					]},
+				"mnu.item.subhead.ccy.info":{
+						"content":
+							["1301|mnu.item.subhead.ccy.info|DUMMY URL|false|false|false|false|false|false|false|false|false"
+						]},
+				"mnu.item.subhead.notif.brd":{
+					"content":[
+						"1501|mnu.item.subhead.notif.brd|DUMMY URL|false|false|false|false|false|false|false|false|false"
+					]},
+				"mnu.item.subhead.holiday.tbl":{
+					"content":[
+						"1401|mnu.item.subhead.holiday.cldr|DUMMY URL|false|false|false|false|false|false|false|false|false",
+						"1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false"
+					]}
+
+			},
+		"mnu.header.configuration":
+			{
+				"mnu.item.subhead.trx.conf":{
+					"content":[
+						"2401|mnu.item.subhead.err.conf|DUMMY URL|false|false|false|false|false|false|false|false|false"
+					]},
+				"mnu.item.subhead.sys.conf":{
+					"content":[
+						"2201|mnu.item.subhead.sys.conf|DUMMY URL|false|false|false|false|false|false|false|false|false"
+					]},
+				"mnu.item.subhead.sec.conf":{
+					"content":[
+						"2301|mnu.item.subhead.sec.conf|DUMMY URL|false|false|false|false|false|false|false|false|false"
+					]}
+			},
+		"mnu.header.prov.mgmt":
+			{
+				"mnu.item.subhead.prov.grp":{
+					"content":["3100|mnu.item.subhead.prov.grp|DUMMY URL|false|false|false|false|false|false|false|false|false"]},
+				"mnu.item.subhead.prov.usr":{
+					"content":["3200|mnu.item.subhead.prov.usr|DUMMY URL|false|false|false|false|false|false|false|false|false"]},
+				"mnu.item.subhead.pwd.mgmt":{
+					"content":[
+						"3400|mnu.item.subhead.rst.pwd|DUMMY URL|false|false|false|false|false|false|false|false|false",
+						"3500|mnu.item.subhead.prn.pwd|DUMMY URL|false|false|false|false|false|false|false|false|false",
+						"3600|mnu.item.subhead.pin.mail|DUMMY URL|false|false|false|false|false|false|false|false|false"
+					]}
+			}
+	}
+}

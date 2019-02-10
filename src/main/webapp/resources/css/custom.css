@@ -1,0 +1,16 @@
+.widget-toolbar .refresh_content{
+	padding: 10px 10px 0 5px;
+}
+.flex-direction-nav a{
+	height: 45px;
+}
+.pagination > li > a, .pagination > li > span{
+	border: none;
+	margin: 0;
+	padding: 0;
+	box-shadow: none;
+}
+
+#table-account-balance td > span, #table-reward-summary td > span{
+	color: #000;
+}

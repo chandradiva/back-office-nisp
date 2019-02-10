@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jee="http://www.springframework.org/schema/jee"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/jee
+    http://www.springframework.org/schema/jee/spring-jee.xsd" >
+
+    <!-- Root Context: defines shared resources visible to all other web components -->
+
+    <jee:jndi-lookup id="apiDataSource" expected-type="javax.sql.DataSource" jndi-name="jdbc/NISPDS" />
+    <bean id="stubUtil" class="com.optima.nisp.utility.RsaUtil" factory-method="getInstance" />
+	<bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+        
+    <bean id="confProp" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath*:config.properties</value>
+			</list>
+		</property>
+	</bean>	
+	<bean id="activityLogDao" class="com.optima.nisp.dao.ActivityLogDao" >
+		<property name="apiDataSource" ref="apiDataSource" />	
+	</bean>	
+	<bean id="activityLogService" class="com.optima.nisp.service.ActivityLogService" >
+		<property name="activityLogDao" ref="activityLogDao" />
+	</bean>
+	<bean id="hardcopyRequestFilter" class="com.optima.nisp.interceptor.LoggingResponseFilter">
+		<property name="activityLogService" ref="activityLogService" />
+	</bean>
+	
+	<!--  <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="com.optima.nisp.utility.MailProcessing.setProperties"/>
+        <property name="arguments">
+            <list>
+                <ref bean="confProp"/>
+            </list>
+       </property>
+    </bean>-->
+	<!-- <bean id="activityLogInstance" class="com.optima.nisp.service.ActivityLogService" factory-method="getInstance" /> -->
+</beans>

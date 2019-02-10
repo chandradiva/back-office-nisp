@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="back-office-nisp">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+  	<property name="meta-inf-folder" value="ear-build/ear-resources" />
+  	<property name="webapp-folder" value="src/main/webapp/" />
+		<property name="web-xml-file" value="src/main/webapp/WEB-INF/web.xml" />
+		<property name="war-directory" value="target/war" />
+		<property name="ear-directory" value="target/ear" />
+		<property name="target-lib-folder" value="target/lib" />
+    <property file="deploy.properties" />   
+    <property name="lib-folder" value="ear-build/lib" />
+    <path id="back-office-nisp.classpath">
+        <pathelement location="target/classes"/>
+    	<fileset dir="${lib-folder}">
+			<include name="*.jar" />
+		</fileset> 
+        
+    </path>
+		<path id="wlappc.classpath">
+	    <fileset dir="${wlappc.classpath}">
+	        <include name="*.jar"/>
+	    </fileset>
+		</path>
+    <target name="init">
+        <mkdir dir="target/classes"/>
+        <copy includeemptydirs="false" todir="target/classes">
+            <fileset dir="src/main/java">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="target/classes">
+            <fileset dir="src/main/resources">
+                <exclude name="**/*.java"/>                
+            </fileset>
+        </copy>        
+    </target>
+    <target name="clean">
+        <delete dir="target/classes"/>
+        <delete dir="target/test-classes"/>
+    	<delete file="${war-directory}/${ant.project.name}.war"/>
+    	<delete file="${ear-directory}/${ant.project.name}.ear"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="target/classes" includeantruntime="false" source="${source}" target="${target}"
+        	>
+            <src path="src/main/java"/>
+            <src path="src/main/resources"/>
+            <classpath refid="back-office-nisp.classpath"/>
+        </javac>        
+    </target>
+  	<target depends="build" name="build-war">
+    	<echo message="Building war" />
+			<mkdir dir="${target-lib-folder}"/>
+    		<copy todir="${target-lib-folder}" flatten="true">
+    			<path refid="back-office-nisp.classpath" />    			
+    		</copy>
+    	<mkdir dir="${war-directory}"/>
+    	<war destfile="${war-directory}/${ant.project.name}.war" 
+    		webxml="${web-xml-file}">
+    		<fileset dir="${meta-inf-folder}">
+    			<include name="**/*.*" />	
+    		</fileset>
+    		<zipfileset dir="${target-lib-folder}" prefix="WEB-INF/lib" />
+    		<fileset dir="${webapp-folder}">
+    			<exclude name="resources" />	
+    		</fileset>
+    		<classes dir="target/classes" />    		
+    	</war>  		
+    </target>
+  	<target depends="build-war" name="build-ear">
+    	<mkdir dir="${ear-directory}"/>
+    	<ear destfile="${ear-directory}/${ant.project.name}.ear" 
+    		appxml="${meta-inf-folder}/META-INF/application.xml">
+    		<fileset dir="${war-directory}" includes="*.war" />
+    		<fileset dir="${meta-inf-folder}">
+    			<include name="**/*.*" />	
+    		</fileset>    		
+    	</ear>
+    </target>
+  	<target name="deploy" depends="build-ear">  
+	    <wldeploy action="deploy" 
+	    		upload="true"
+	        name="${ant.project.name}"
+	        source="${ear-directory}/${ant.project.name}.ear"
+	        user="${admin.username}"
+	        nostage="true"
+	        password="${admin.password}"
+	        verbose="true"
+	        adminurl="t3://${admin.addr}:${admin.port}"
+	        targets="${cluster.name}"
+	        debug="false"/>
+		</target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+</project>

@@ -1,0 +1,74 @@
+@import url('../fonts/webfonts/OpenSans/font.css');
+* {
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:focus, a:hover {
+    text-decoration: none;
+}
+
+html, body {
+  width: 100%;
+  /*margin: 1.5em auto;*/
+  height:100%;
+  color: #333;
+}
+h1 {
+  font-family: 'Pacifico', cursive;
+  font-weight: 400;
+  font-size: 2.5em;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+ul .inner-menu {
+  padding-left: 18px;
+  overflow: hidden;
+  display: none;
+}
+ul .inner-menu.show {
+  /*display: block;*/
+}
+ul li {
+  margin: .5em 0;
+}
+ul li a.toggle {
+  width: 100%;
+  display: block;
+/*  background: rgba(0, 0, 0, 0.78);*/
+  background: rgb(230,33,41);
+  color: #fefefe;
+  padding: .75em;
+  border-radius: 0.15em;
+  transition: background .3s ease;
+}
+ul li a.toggle:hover {
+/*  background: rgba(0, 0, 0, 0.9);*/
+    background: rgb(200,3,11);
+  cursor: pointer;
+}
+
+#page-container {
+    width:90%;
+    min-height: 200px;
+}
+
+.page-sidebar{
+    width: 20%;
+    float: left;
+    padding-left: .5em;
+}
+
+.page-content{
+    width: 80%;
+    float: right;
+    text-align: left;
+    padding: 5px 10px;
+}

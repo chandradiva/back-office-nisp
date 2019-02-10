@@ -1,0 +1,18 @@
+.navbar {min-height: 142px; height:auto !important; height: 142px; padding-top:10px;}
+#login_page .navbar, #change_password_page .navbar {min-height: 80px; height:auto !important; height: 80px;}
+.navbar-brand > img {display:inline;}
+.navbar-nav > li > a {padding-bottom: 22px !important; padding-top: 22px !important;}
+.widget-sidebar {margin-left: 0!important; width: 48.5%;}
+.top-header .welcome-block  {margin:0;}
+.top-header .top-menu {margin:0;}
+#company-logo {margin:0;}
+#ocbcnisp-logo {margin:10px 0 0;}
+
+/* ========= IE8 - IE9 =========== */
+/*.ie8 .navbar-nav > li > a, .ie9 .navbar-nav > li > a {padding-bottom: 22px!important; padding-top: 22px!important;}
+.ie8 .navbar-default .navbar-collapse, .ie9 .navbar-default .navbar-collapse {padding-bottom: 7px!important;}
+.ie8 .yamm-fw .row, .ie9 .yamm-fw .row {zoom:1; position:relative;}
+.ie8  .navbar-nav > li > .dropdown-menu ul, .ie9  .navbar-nav > li > .dropdown-menu ul {background:none; display:block; float:left;}
+.ie8  .navbar-nav > li > .dropdown-menu ul.col-sm-6, .ie9  .navbar-nav > li > .dropdown-menu ul.col-sm-6 {width: 50%;}
+.ie8  .navbar-nav > li > .dropdown-menu ul.col-sm-4, .ie9  .navbar-nav > li > .dropdown-menu ul.col-sm-4 {width: 33.3333%;}
+.ie8  .navbar-nav > li > .dropdown-menu ul.col-sm-3, .ie9  .navbar-nav > li > .dropdown-menu ul.col-sm-3 {width: 25%;}*/

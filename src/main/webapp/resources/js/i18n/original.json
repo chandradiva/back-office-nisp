@@ -1,0 +1,100 @@
+{
+    "tableUserProfileAccess": {
+        "mnu.header.general.info": {
+            "mnu.item.subhead.bank.list": [
+                "1101|mnu.item.subhead.tele.trf|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1102|mnu.item.subhead.interbank|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1103|mnu.item.subhead.online.trf|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ],
+            "mnu.item.subhead.bill.org.list": [
+                "1201|mnu.item.subhead.bill.org.list|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ],
+            "mnu.item.subhead.ccy.info": [
+                "1301|mnu.item.subhead.ccy.info|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ],
+            "mnu.item.subhead.holiday.tbl": [
+                "1401|mnu.item.subhead.holiday.cldr|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ],
+            "mnu.item.subhead.notif.brd": [
+                "1501|mnu.item.subhead.notif.brd|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ]
+        },
+        "mnu.header.configuration": {
+            "mnu.item.subhead.trx.conf": [
+                "2401|mnu.item.subhead.err.conf|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ],
+            "mnu.item.subhead.sys.conf": [
+                "2201|mnu.item.subhead.sys.conf|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ],
+            "mnu.item.subhead.sec.conf": [
+                "2301|mnu.item.subhead.sec.conf|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ]
+        },
+        "mnu.header.prov.mgmt": {
+            "mnu.item.subhead.holiday.tbl": [
+                "1401|mnu.item.subhead.holiday.cldr|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ],
+            "mnu.item.subhead.notif.brd": [
+                "1501|mnu.item.subhead.notif.brd|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ],
+            "mnu.item.subhead.tkn.mgmt": [
+                "3400|mnu.item.subhead.tkn.mgmt|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ],
+            "mnu.item.subhead.prov.mgmt": [
+                "3300|mnu.item.subhead.prov.mgmt|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ],
+            "mnu.item.subhead.prov.usr": [
+                "3200|mnu.item.subhead.prov.usr|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ],
+            "mnu.item.subhead.prov.grp": [
+                "3100|mnu.item.subhead.prov.grp|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "1402|mnu.item.subhead.prod.hldy|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ],
+            "mnu.item.subhead.notif.test1": {
+                "mnu.item.subhead.notif.test1.sub1": [
+                    "1501|notif.test1.sub1.a|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                    "1501|notif.test1.sub1.b|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                    "1501|notif.test1.sub1.c|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                    "1501|notif.test1.sub1.d|DUMMY URL|false|false|false|false|false|false|false|false|false"
+                ],
+                "mnu.item.subhead.notif.test1.sub2": [
+                    "1501|notif.test1.sub2.a|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                    "1501|notif.test1.sub2.b|DUMMY URL|false|false|false|false|false|false|false|false|false"
+                ],
+                "mnu.item.subhead.notif.test1.sub3": [
+                        "1501|notif.test1.sub3.a|DUMMY URL|false|false|false|false|false|false|false|false|false"
+                ],
+                "mnu.item.subhead.notif.test1.sub4": [
+                    "1501|notif.test1.sub4.a|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                    "1501|notif.test1.sub4.b|DUMMY URL|false|false|false|false|false|false|false|false|false"
+                ]
+            }
+        },
+        "mnu.header.reports": {
+            "mnu.item.subhead.reports": [
+                "4101|mnu.item.subhead.reports1|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "4201|mnu.item.subhead.reports2|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "4301|mnu.item.subhead.reports3|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "4401|mnu.item.subhead.reports4|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "4501|mnu.item.subhead.reports5|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "4601|mnu.item.subhead.reports6|DUMMY URL|false|false|false|false|false|false|false|false|false",
+                "4701|mnu.item.subhead.reports7|DUMMY URL|false|false|false|false|false|false|false|false|false"
+            ]
+        }	
+    }
+}
