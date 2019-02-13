@@ -52,11 +52,12 @@ public class KonsolidasiBlacklistService {
 	}
 	
 	public void insertData(KonsolidasiBlacklistApi req) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException {
-		KonsolidasiBlacklist blacklist = blacklistDao.getByCIF(req.getCif());
+		String cifPad = StringUtils.normalizeCifKey(req.getCif());
+		KonsolidasiBlacklist blacklist = blacklistDao.getByCIF(cifPad);
 		if (blacklist == null) {
 			blacklist = new KonsolidasiBlacklist();
 			blacklist.setCifOri(req.getCif());
-			blacklist.setCifPad(StringUtils.normalizeCifKey(req.getCif()));
+			blacklist.setCifPad(cifPad);
 			blacklist.setCreatedDate(new Date());
 			blacklist.setFlag(new Long(1));
 			

@@ -219,6 +219,7 @@
 	</label>
     <table class="table table-striped table-bordered table-detail-send-email">
         <thead>
+        	<th style="width:20px; text-align: center;">NO</th>
             <th style="width:100px;">CIF Key</th>
             <th style="width:120px; text-align:center;">Created Date</th>
             <th style="width:110px; text-align:center;">Blacklist</th>
@@ -350,15 +351,18 @@
                     showNoRecord();
                 }
 
+                var no = 1;
                 $.each(response.data, function(i,item){
-                	var row = "<tr><td>"
+                	var row = "<tr><td style='text-align:center;'>" + no + "</td> <td style='text-align:left;'>"
                         + "<input type='hidden' value='" + item.id + "' />";
                         
 	                row += (item.cifPad != null ? item.cifPad : "N/A") + "</td>"
-	                        + "<td style='text-align:left;'>" + item.createdDate + "</td>"
+	                        + "<td style='text-align:center;'>" + item.createdDate + "</td>"
 	                        + "<td>" + getFlag(item.flag) + "</td></tr>";
 
                     $('.table-detail-send-email tbody').append(row);
+                    
+                    no++;
                 });
             } else {
                 alert(response.message);

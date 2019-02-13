@@ -27,12 +27,12 @@ public class KonsolidasiBlacklist implements Serializable {
 	@NISPEntity(columnName = "CIF_PAD")
 	private String cifPad;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy", timezone = "Asia/Jakarta")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "Asia/Jakarta")
 	@NISPEntitySerialize(field = "CREATED_DATE")
 	@NISPEntity(columnName = "CREATED_DATE")
 	private Date createdDate;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy", timezone = "Asia/Jakarta")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "Asia/Jakarta")
 	@NISPEntitySerialize(field = "UPDATED_DATE")
 	@NISPEntity(columnName = "UPDATED_DATE")
 	private Date updatedDate;

@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 
 import javax.annotation.Resource;
@@ -18,12 +17,11 @@ import com.optima.nisp.constanta.EmailContentType;
 import com.optima.nisp.constanta.ParameterCons;
 import com.optima.nisp.constanta.SendEmailStatus;
 import com.optima.nisp.dao.EmailAttachmentDao;
-import com.optima.nisp.dao.EmailContentDao;
 import com.optima.nisp.dao.KonsolidasiEmailDao;
 import com.optima.nisp.dao.KonsolidasiEmailLogDao;
+import com.optima.nisp.dao.LaporanKonsolidasiParameterDao;
 import com.optima.nisp.dao.SystemParameterDao;
 import com.optima.nisp.model.EmailAttachment;
-import com.optima.nisp.model.EmailContent;
 import com.optima.nisp.model.KonsolidasiEmail;
 import com.optima.nisp.model.KonsolidasiEmailLog;
 import com.optima.nisp.model.SystemParameter;
@@ -44,9 +42,6 @@ public class KonsolidasiEmailService {
 	private KonsolidasiEmailLogDao konsolidasiLogDao;
 	
 	@Autowired
-	private EmailContentDao emailContentDao;
-	
-	@Autowired
 	private EmailAttachmentDao emailAttachmentDao;
 	
 	@Autowired
@@ -60,6 +55,9 @@ public class KonsolidasiEmailService {
 	
 	@Autowired
 	private MailProcessing mailProcessing;
+	
+	@Autowired
+	private LaporanKonsolidasiParameterDao parameterDao;
 	
 	public List<KonsolidasiEmailResponse> getEmails(String cifKey, String periode, int status, int page, int totalPerPage) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException {
 		List<KonsolidasiEmailResponse> listSE = konsolidasiDao.getEmails(cifKey, periode, status, page, totalPerPage);
@@ -111,7 +109,10 @@ public class KonsolidasiEmailService {
 	
 	public void sendAll(List<KonsolidasiEmail> emails) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException {				
 		String mailFrom = (String) properties.get("mail_from");
-		String preSubject = "Consolidastion Report Periode ";
+		String preSubject = parameterDao.getByKey("SUBJECT_EML").getValue();
+		String bodyEmailID = parameterDao.getByKey("BODY_EML_ID").getValue();
+		String bodyEmailEN = parameterDao.getByKey("BODY_EML_EN").getValue();
+		
 		String separator = "\n\n";
 		
 		for(KonsolidasiEmail email : emails){
@@ -124,50 +125,40 @@ public class KonsolidasiEmailService {
 			
 //			List<String> mailTos  = sendEmailDao.getEmail(email.getAccountNumber(), emailType);
 			List<String> mailTos  = new ArrayList<String>();
+			String emailDummy = "marthin.nainggolan@ocbcnisp.com";
+			mailTos.add(emailDummy);
 			for (String mailTo : mailTos) {
 				String periode = CommonUtils.getLongPeriode(email.getPeriode());
-				String subject = preSubject + periode;
+				String subject = preSubject.replaceAll("#periode#", periode);
 				
-				EmailContent content = emailContentDao.getEmailContent(emailType);
 				String emailCallbackUrl = appParamService.getByKey("ERNC").getValue();
-				String body = "<html><head></head><body><p>"+content.getHeader() + separator +"</p><p>"+ content.getBody() + separator+"</p><p>";
-				if( email.getIsPasswordDefault() != 1 )
-					body+=content.getPembukaPassword();
-				else
-					body+=content.getPembukaNoPassword();
-				body+= separator + "</p><p>"+ content.getPenutup() + separator+"</p><p>"
-						+ content.getFooter()+"</p>\n";
-				body += "<img src=\""+emailCallbackUrl+email.getId()+".png?email="+mailTo+"&subject="+subject+"\" >"
-						 + "<p style=\"display:none\">N--"+email.getId()+"--N</p></body></html>";
+				String bodyEmail = bodyEmailID + bodyEmailEN;
+				bodyEmail = bodyEmail.replaceAll("#cust_name#", email.getNamaRekening().toUpperCase());
 				
+				String body = "<html><head></head><body><p>"+ bodyEmail + separator+"</p><p>";
+				body += separator + "</p>\n";
+				body += "<img src=\"" + emailCallbackUrl + email.getId() + ".png?email=" + mailTo + "&subject=" + subject + "\" >"
+						 + "<p style=\"display:none\">N--" + email.getId() + "--N</p></body></html>";
 				
-				String password = konsolidasiDao.getStatementPassword(email.getCifKey());
-				
-				body = body.replace("<account-number>", email.getAccountNumber());
-				body = body.replace("<period>", (periode!=null) ? periode : "");
-				body = body.replace("<password>", (password!=null) ? password : "");
-				body = body.replace("<today>", CommonUtils.getStrDate(new Date(), "dd MMMM yyyy", Locale.forLanguageTag("id-ID")));
-				body = body.replace("<customer-name>", email.getNamaRekening());
-				body = body.replace("<product-name>", email.getProductName());
-							
 				boolean emptyMailTo = false;
-				if(mailTo==null || mailTo.isEmpty()){
+				if (mailTo == null || mailTo.isEmpty()) {
 					emptyMailTo = true;
 				}
 				
-				if(email.getFilename()!=null && !email.getFilename().isEmpty())
-					attachments.add("FROM_API|"+email.getFilename());
+				if (email.getFilename() != null && !email.getFilename().isEmpty()) {
+					attachments.add("FROM_API|" + email.getFilename());
+				}
 				
 				if (emailType.equals(EmailContentType.LAPORAN_KONSOLIDASI)) {
 					EmailAttachment attachment = emailAttachmentDao.getByCategory(emailCategory);
 					
-					if(attachment!=null && attachment.getAttachment()!=null && !attachment.getAttachment().isEmpty()){
+					if (attachment != null && attachment.getAttachment() != null && !attachment.getAttachment().isEmpty()) {
 						attachments.add(attachment.getAttachment());
 					}
 				}
 				
 				try {
-					if(!emptyMailTo){
+					if (!emptyMailTo) {
 						mailProcessing.sendEmail(mailFrom, mailTo, subject, body, attachments, email.getId());
 						
 						KonsolidasiEmail newEmail = new KonsolidasiEmail();
@@ -203,7 +194,7 @@ public class KonsolidasiEmailService {
 						konsolidasiLogDao.create(log);
 					}
 					
-				} catch(Exception e){
+				} catch(Exception e) {
 					KonsolidasiEmail newEmail = new KonsolidasiEmail();
 					newEmail.setId(email.getId());
 					newEmail.setStatus(SendEmailStatus.FAILED);

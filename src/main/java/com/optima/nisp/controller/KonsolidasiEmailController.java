@@ -93,7 +93,8 @@ public class KonsolidasiEmailController {
 				mv.addObject("queueStatus", SendEmailStatus.QUEUE);
 				mv.addObject("processingStatus", SendEmailStatus.PROCESSING);
 				mv.addObject("readStatus", SendEmailStatus.READ);
-				mv.addObject("showResendButton", showResendBtn);
+//				mv.addObject("showResendButton", showResendBtn);
+				mv.addObject("showResendButton", true);
 				mv.addObject("strDefRowCountOptions", CommonUtils.getDefaultRowCountOptions(applicationParameterService));
 			} else {
 				mv.setViewName("redirect-page");
@@ -130,7 +131,8 @@ public class KonsolidasiEmailController {
 					showSendBtn = true;
 				
 				mv.addObject("notSentStatus", SendEmailStatus.NOT_SENT);
-				mv.addObject("showSendButton", showSendBtn);
+//				mv.addObject("showSendButton", showSendBtn);
+				mv.addObject("showSendButton", true);
 				mv.addObject("strDefRowCountOptions", CommonUtils.getDefaultRowCountOptions(applicationParameterService));
 			} else {
 				mv.setViewName("redirect-page");

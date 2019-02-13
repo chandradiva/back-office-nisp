@@ -91,7 +91,7 @@ public class KonsolidasiBlacklistDao extends ParentDao<KonsolidasiBlacklist> {
 	}
 	
 	public KonsolidasiBlacklist getByCIF(String cif) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException, NoSuchMethodException, SecurityException {
-		String sql = "SELECT * FROM " + CommonCons.FE_DB_SCHEMA + ".BO_TBL_KONSOLIDASI_BLACKLIST WHERE CIF_ORI = ?";
+		String sql = "SELECT * FROM " + CommonCons.FE_DB_SCHEMA + ".BO_TBL_KONSOLIDASI_BLACKLIST WHERE CIF_PAD = ?";
 		
 		List<Object> args = new ArrayList<Object>();
 		args.add(cif);

@@ -140,7 +140,7 @@
     
 </style>
 
-<h4>Validasi Laporan Konsolidasi</h4>
+<h4>Validasi Consolidated Statement</h4>
 
 <br />
 
@@ -151,10 +151,6 @@
             <td>CIF Key</td>
             <td><input type="text" class="form-control input-cif-key" maxlength="50" /></td>
         </tr>
-        <!-- <tr>
-            <td>Account Number</td>
-            <td><input type="text" class="form-control input-account-number" maxlength="50" /></td>
-        </tr> -->
         <tr>
             <td>Periode</td>
             <td><input class="form-control input-periode" style="cursor:pointer;" placeholder="Month YYYY" type="text" readonly /></td>
@@ -195,7 +191,6 @@
                 <input type="checkbox" id="parent-check" checked />
             </th>
             <th style="width:100px;">CIF Key</th>
-            <!-- <th style="width:130px;">Account Number</th> -->
             <th style="width:130px;">Periode</th>
             <th style="width:120px; text-align:center;">PDF Generated Date</th>
             <th style="width:110px; text-align:center;">Tanggal Kirim</th>
@@ -231,7 +226,6 @@
 
 <div id="parameter-awal" style="display:none;">
     <input class="old-cif-key" value="" />
-    <input class="old-account-number" value="" />
     <input class="old-periode" value="" />
     <input class="old-status" value="${notSentStatus}" />
     <input class="old-total-records" value="0" />
@@ -248,11 +242,10 @@
     		$('.old-total-per-page').val(val);
     		$('#search-btn').click();
     	});
-        document.title = "Validasi Laporan Konsolidasi";
+        document.title = "Validasi Consolidated Statement";
 
         /*Request awal Table & Pagination*/
         var cifKey = $(".old-cif-key").val();
-        var accountNumber = $(".old-account-number").val();
         var periode = $(".old-periode").val();
         var status = $(".old-status").val();
         var pageNumber = 1;
@@ -330,8 +323,7 @@
                 
                 //if(totalRecord > totalPerPage)
                     showDivInfo();
-            }
-            else {
+            } else {
                 $(".email-checkbox").prop("checked", false);
                 hideDivInfo();
             }
@@ -467,8 +459,7 @@
                 checkUncheckEvent();
                 sendAllButton();
                 //setCheckBoxColumn();
-            }
-            else {
+            } else {
                 alert(response.message);
             }
         });
@@ -621,7 +612,6 @@
 
     function pageNumberPaginationEvent(){
         var cifKey = $(".old-cif-key").val();
-        var accountNumber = $(".old-account-number").val();
         var periode = $(".old-periode").val();
         var status = parseInt($(".old-status").val());
         var totalPerPage = $(".old-total-per-page").val();
@@ -651,7 +641,6 @@
 
     function setOldValues(cifKey, periode, status){
         $(".old-cif-key").val(cifKey);
-        $(".old-account-number").val('');
         $(".old-periode").val(periode);
         $(".old-status").val(status);
     }
@@ -659,7 +648,6 @@
     function searchButtonEvent(){
         $("#search-btn").off().on("click", function(){
             var cifKey = $(".input-cif-key").val();
-            var accountNumber = $(".input-account-number").val();
             var periode = getPeriodeValue();
             var status = ${notSentStatus};
             var totalPerPage = $(".old-total-per-page").val();
@@ -676,12 +664,10 @@
 
     function clearFilter(){
         $(".input-cif-key").val("");
-        $(".input-account-number").val("");
         $(".input-periode").val("");
         resetAllChecked();
 
         var cifKey = $(".input-cif-key").val();
-        var accountNumber = $(".input-account-number").val();
         var periode = $(".input-periode").val();
         var status = ${notSentStatus};
         var totalPerPage = $(".old-total-per-page").val();
@@ -735,16 +721,14 @@
                     first.show();
                     first = first.next();
                 }
-            }
-            else if(activePage == totalPage){
+            } else if(activePage == totalPage){
                 var last = $(".page-number-btn-pagination").last();
                 hideAllPage();
                 for(var i=1;i<=numberOfNav;i++){
                     last.show();
                     last = last.prev();
                 }
-            }
-            else {
+            } else {
                 var first = $("ul.paginations").find("li.page-number-btn-pagination:visible:first");
                 var last = $("ul.paginations").find("li.page-number-btn-pagination:visible:last");
                 var firstValue = parseInt($("ul.paginations").find("li.page-number-btn-pagination:visible:first").children().first().val());
@@ -772,8 +756,7 @@
                                 button.show();
                                 button = button.next();
                             }
-                        }
-                        else {
+                        } else {
                             button = lastPage;
                             for(var i=1;i<=numberOfNav;i++){
                                 button.show();
@@ -781,14 +764,14 @@
                             }
                         }
                     }
+                    
                     if(status==2){
                         if(activePage - numberOfNav >= 1){
                             for(var i=1;i<=numberOfNav;i++){
                                 button.show();
                                 button = button.prev();
                             }
-                        }
-                        else {
+                        } else {
                             button = firstPage;
                             for(var i=1;i<=numberOfNav;i++){
                                 button.show();
@@ -906,7 +889,6 @@
             if($(this).hasClass("disabled") == false){
                 var periode = getPeriodeValue();
                 var cifKey = $(".old-cif-key").val();
-                var accountNumber = $(".old-account-number").val();
                 var status = parseInt($(".old-status").val());
                 var totalPerPage = parseInt($(".old-total-per-page").val());
                 var pageNumber = 1;
@@ -922,7 +904,6 @@
             if($(this).hasClass("disabled") == false){
                 var periode = getPeriodeValue();
                 var cifKey = $(".old-cif-key").val();
-                var accountNumber = $(".old-account-number").val();
                 var status = parseInt($(".old-status").val());
                 var totalPerPage = parseInt($(".old-total-per-page").val());
                 var pageNumber = parseInt($(".page-number-btn-pagination.active").children().first().val()) - 1;
@@ -939,7 +920,6 @@
             if($(this).hasClass("disabled") == false){
                 var periode = getPeriodeValue();
                 var cifKey = $(".old-cif-key").val();
-                var accountNumber = $(".old-account-number").val();
                 var status = parseInt($(".old-status").val());
                 var totalPerPage = parseInt($(".old-total-per-page").val());
                 var pageNumber = parseInt($(".page-number-btn-pagination.active").children().first().val()) + 1;
@@ -955,7 +935,6 @@
             if($(this).hasClass("disabled") == false){
                 var periode = getPeriodeValue();
                 var cifKey = $(".old-cif-key").val();
-                var accountNumber = $(".old-account-number").val();
                 var status = parseInt($(".old-status").val());
                 var totalPerPage = parseInt($(".old-total-per-page").val());
                 var pageNumber = $(".page-number-btn-pagination").length;
@@ -1033,7 +1012,6 @@
         return parseInt($(".all-checked-status").val());
     }
 
-
     function sendAllButton(){
         <c:if test="${showSendButton==true}">
         $(".send-all-btn").off().on("click", function(){
@@ -1046,7 +1024,6 @@
     function ajaxRequestSendEmail(actionString){
         if(getAllCheckedStatus()==1){
             var cifKey = $(".old-cif-key").val();
-            var accountNumber = $(".old-account-number").val();
             var periode = $(".old-periode").val();
             var status = parseInt($(".old-status").val());
 
@@ -1082,14 +1059,12 @@
                         alert(response.message);
                         var periode = getPeriodeValue();
                         var cifKey = $(".old-cif-key").val();
-                        var accountNumber = $(".old-account-number").val();
                         var status = parseInt($(".old-status").val());
                         var totalPerPage = parseInt($(".old-total-per-page").val());
                         var pageNumber = $(".page-number-btn-pagination.active").children().first().val();
 
                         refreshTable(cifKey, periode, status, pageNumber, totalPerPage, getAllCheckedStatus());
-                    }
-                    else {
+                    } else {
                         alert(response.message);
                     }
                 });
@@ -1131,14 +1106,12 @@
                             alert(response.message);
                             var periode = getPeriodeValue();
                             var cifKey = $(".old-cif-key").val();
-                            var accountNumber = $(".old-account-number").val();
                             var status = parseInt($(".old-status").val());
                             var totalPerPage = parseInt($(".old-total-per-page").val());
                             var pageNumber = $(".page-number-btn-pagination.active").children().first().val();
 
                             refreshTable(cifKey, periode, status, pageNumber, totalPerPage, getAllCheckedStatus());
-                        }
-                        else {
+                        } else {
                             alert(response.message);
                         }
                     });

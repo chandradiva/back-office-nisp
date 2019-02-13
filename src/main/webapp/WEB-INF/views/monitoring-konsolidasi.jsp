@@ -138,7 +138,7 @@
     }
 </style>
 
-<h4>Monitoring Laporan Konsolidasi</h4>
+<h4>Monitoring Consolidated Statement</h4>
 
 <br />
 
@@ -244,7 +244,6 @@
 
 <div id="parameter-awal" style="display:none;">
     <input class="old-cif-key" value="" />
-    <input class="old-account-number" value="" />
     <input class="old-periode" value="" />
     <input class="old-status" value="${defaultStatus}" />
     <input class="old-total-records" value="0" />
@@ -259,7 +258,7 @@
 	var gActivePage=1;
 	var gLastPage;
     $(document).ready(function(){    	
-        document.title = "Monitoring Laporan Konsolidasi";
+        document.title = "Monitoring Consolidated Statement";
 
         $('#table_length').on('change', function(e){
     		var val = $(this).val();
@@ -269,7 +268,6 @@
         
         /*Request awal Table & Pagination*/
         var cifKey = $(".old-cif-key").val();
-        var accountNumber = $(".old-account-number").val();
         var periode = $(".old-periode").val();
         var status = $(".old-status").val();
         var pageNumber = 1;
@@ -338,23 +336,13 @@
 
     function checkAllEvent(){
         $("#parent-check").on("change", function(){
-            if($(this).is(":checked")){
-            		/* $.each($("input.email-checkbox"), function(){
-            				if($(this).prop("disabled") == false){
-            						$(this).prop("checked", true);
-            				}
-            		}) */
-            		$("input.email-checkbox:enabled").prop("checked", true);
-
-                //var totalRecord = parseInt($(".old-total-records").val());
+            if ($(this).is(":checked")) {
+            	$("input.email-checkbox:enabled").prop("checked", true);
                 var totalRecord = getTotalRecordsWL();
-                //var totalPerPage = parseInt($(".old-total-per-page").val());
                 var totalPerPage = $("input.email-checkbox:enabled").length;
 
-                //if(totalRecord > totalPerPage)
-                    showDivInfo();
-            }
-            else {
+                showDivInfo();
+            } else {
                 $(".email-checkbox").prop("checked", false);
                 hideDivInfo();
             }
@@ -363,22 +351,18 @@
 
     function checkUncheckEvent(){
         $(".email-checkbox").on("change", function(){
-            if($(this).is(":checked")){
+            if ($(this).is(":checked")) {
                 if ($('.email-checkbox:checked').length == $('.email-checkbox:enabled').length) {
                     $("#parent-check").prop("checked", true);
-
-                    //var totalRecord = parseInt($(".old-total-records").val());
                     var totalRecord = getTotalRecordsWL();
-                    //var totalPerPage = parseInt($(".old-total-per-page").val());
                     var totalPerPage = $("input.email-checkbox:enabled").length;
 
-                    //if(totalRecord > totalPerPage)
-                        showDivInfo();
+                    showDivInfo();
                 }
             } else {
                 if ($('.email-checkbox:checked').length != $('.email-checkbox:enabled').length) {
-                   $("#parent-check").prop("checked", false);
-                    hideDivInfo();
+                   	$("#parent-check").prop("checked", false);
+                   	hideDivInfo();
                 }
             }
         })
@@ -443,14 +427,19 @@
                 }
 
                 $.each(response.data, function(i,item){
-                	if(checkedStatus==1){                		
+                	/* var accNo = item.accountNumber!=null ? item.accountNumber : "N/A";
+                    if (accNo.length == 19) {
+                    	accNo = accNo.substring(7);
+                    } */
+                    
+                	if (checkedStatus == 1) {                		
 	                    var row = "<tr><td class='check-column'>"
 	                            + "<input type='hidden' value='" + item.id + "' />";
 	                            
-	                    if(item.enabledStatus==false){
-	                    		row += "<input type='checkbox' class='email-checkbox' disabled/></td><td style='text-align:left;'>"; 
+	                    if (item.enabledStatus == false) {
+	                    	row += "<input type='checkbox' class='email-checkbox' disabled/></td><td style='text-align:left;'>"; 
 	                    } else {
-	                    		row += "<input type='checkbox' class='email-checkbox' checked/></td><td style='text-align:left;'>";
+	                    	row += "<input type='checkbox' class='email-checkbox' checked/></td><td style='text-align:left;'>";
 	                    }        
 	                            
 	                    row +=  (item.cifKey!=null ? item.cifKey : "N/A") + "</td>"
@@ -465,11 +454,10 @@
                 		var row = "<tr><td class='check-column'>"
                             + "<input type='hidden' value='" + item.id + "' />"
                             
-	                    if(item.enabledStatus==false){
-	                    		row += "<input type='checkbox' class='email-checkbox' disabled/></td><td style='text-align:left;'>";
-	                    }
-	                    else {
-	                    		row += "<input type='checkbox' class='email-checkbox'/></td><td style='text-align:left;'>";
+	                    if (item.enabledStatus == false) {
+	                    	row += "<input type='checkbox' class='email-checkbox' disabled/></td><td style='text-align:left;'>";
+	                    } else {
+	                    	row += "<input type='checkbox' class='email-checkbox'/></td><td style='text-align:left;'>";
 	                    }        
 	                            
 	                    row +=  (item.cifKey!=null ? item.cifKey : "N/A") + "</td>"
@@ -487,9 +475,8 @@
 
                 checkAllEvent();
                 
-                if(getAllCheckedStatus()==1){
+                if (getAllCheckedStatus() == 1) {
                 	showDivInfo();
-                	//selectAllData($(".old-total-records").val());
                 	selectAllData(getTotalRecordsWL());
                 } else {
                 	hideDivInfo();
@@ -497,25 +484,24 @@
                 
                 checkUncheckEvent();
                 resendAllButton();
-                //setCheckBoxColumn();
-            }
-            else {
+            } else {
                 alert(response.message);
             }
         });
-        ajax.fail(function(xhr,status){
+        ajax.fail(function(xhr,status) {
             alert('Failed: '+status);
         });
     }
 
-    function getFileName(fullpath){
-        if(fullpath==null)
-            return "-";
+    function getFileName(fullpath) {
+        if (fullpath==null) {
+        	return "-";
+        }
 
         return fullpath.replace(/^.*[\\\/]/, '');
     }
 
-    function getPeriode(yyyyMM){
+    function getPeriode(yyyyMM) {
         var bulan;
         var tahun = yyyyMM.substr(0,4);
 
@@ -599,16 +585,14 @@
 			        	totalRow = response.data;
 			            refreshPagination(totalRow);
 			            setActivePage(1);
-			        }
-			        else {
+			        } else {
 			            alert(response.message);
 			        }
 			    });
 			    ajax.fail(function(xhr,status){
 			        alert('Failed: '+status);
 			    });
-            }
-            else {
+            } else {
                 alert(response.message);
             }
         });
@@ -618,20 +602,17 @@
     }
     
     function getTotalRecordsWL(){
-    		return $("input.old-total-records-wl").val();
+    	return $("input.old-total-records-wl").val();
     }
 
     function refreshPagination(totalRow){
         var totalPerPage = $(".old-total-per-page").val();
         var jmlPage = Math.ceil(totalRow/totalPerPage);
 		gLastPage = jmlPage;
-        /*Remove Previous Pagination*/
+        
+		/*Remove Previous Pagination*/
         $("li.page-number-btn-pagination").remove();
-        // $.each($("li"),function() {
-        //     if($(this).hasClass("page-number-btn-pagination"))
-        //         $(this).remove();
-        // })
-
+        
         /*Append new pagination*/
         var start=gActivePage - 4;
         if( start < 1 )
@@ -657,7 +638,6 @@
 
     function pageNumberPaginationEvent(){
         var cifKey = $(".old-cif-key").val();
-        var accountNumber = $(".old-account-number").val();
         var periode = $(".old-periode").val();
         var status = parseInt($(".old-status").val());
         var totalPerPage = $(".old-total-per-page").val();
@@ -689,7 +669,6 @@
 
     function setOldValues(cifKey, periode, status){
         $(".old-cif-key").val(cifKey);
-        $(".old-account-number").val('');
         $(".old-periode").val(periode);
         $(".old-status").val(status);
     }
@@ -697,7 +676,6 @@
     function searchButtonEvent(){
         $("#search-btn").off().on("click", function(){
             var cifKey = $(".input-cif-key").val();
-            var accountNumber = $(".input-account-number").val();
             var periode = getPeriodeValue();
             var status = $(".input-status").val();
             var totalPerPage = $(".old-total-per-page").val();
@@ -714,7 +692,6 @@
 
     function clearFilter(){
         $(".input-cif-key").val("");
-        $(".input-account-number").val("");
         $(".input-periode").val("");
         resetAllChecked();
         
@@ -727,7 +704,6 @@
         })
 
         var cifKey = $(".input-cif-key").val();
-        var accountNumber = $(".input-account-number").val();
         var periode = $(".input-periode").val();
         var status = $(".input-status").val();
         var totalPerPage = $(".old-total-per-page").val();
@@ -781,16 +757,14 @@
                     first.show();
                     first = first.next();
                 }
-            }
-            else if(activePage == totalPage){
+            } else if(activePage == totalPage){
                 var last = $(".page-number-btn-pagination").last();
                 hideAllPage();
                 for(var i=1;i<=numberOfNav;i++){
                     last.show();
                     last = last.prev();
                 }
-            }
-            else {
+            } else {
                 var first = $("ul.paginations").find("li.page-number-btn-pagination:visible:first");
                 var last = $("ul.paginations").find("li.page-number-btn-pagination:visible:last");
                 var firstValue = parseInt($("ul.paginations").find("li.page-number-btn-pagination:visible:first").children().first().val());
@@ -818,8 +792,7 @@
                                 button.show();
                                 button = button.next();
                             }
-                        }
-                        else {
+                        } else {
                             button = lastPage;
                             for(var i=1;i<=numberOfNav;i++){
                                 button.show();
@@ -833,8 +806,7 @@
                                 button.show();
                                 button = button.prev();
                             }
-                        }
-                        else {
+                        } else {
                             button = firstPage;
                             for(var i=1;i<=numberOfNav;i++){
                                 button.show();
@@ -854,9 +826,6 @@
     }
 
     function setPrevNextBtn(){
-        //var lastPage = $(".page-number-btn-pagination").length;
-        //var activePage = $(".page-number-btn-pagination.active").children().first().val();
-
         /*Set Enabled Disabled Button*/
         if(gActivePage==1){
             $(".prev-btn-pagination").addClass("disabled");
@@ -952,7 +921,6 @@
             if($(this).hasClass("disabled") == false){
                 var periode = getPeriodeValue();
                 var cifKey = $(".old-cif-key").val();
-                var accountNumber = $(".old-account-number").val();
                 var status = parseInt($(".old-status").val());
                 var totalPerPage = parseInt($(".old-total-per-page").val());
                 var pageNumber = 1;
@@ -968,7 +936,6 @@
             if($(this).hasClass("disabled") == false){
                 var periode = getPeriodeValue();
                 var cifKey = $(".old-cif-key").val();
-                var accountNumber = $(".old-account-number").val();
                 var status = parseInt($(".old-status").val());
                 var totalPerPage = parseInt($(".old-total-per-page").val());
                 //var pageNumber = parseInt($(".page-number-btn-pagination.active").children().first().val()) - 1;
@@ -985,7 +952,6 @@
             if($(this).hasClass("disabled") == false){
                 var periode = getPeriodeValue();
                 var cifKey = $(".old-cif-key").val();
-                var accountNumber = $(".old-account-number").val();
                 var status = parseInt($(".old-status").val());
                 var totalPerPage = parseInt($(".old-total-per-page").val());
                 //var pageNumber = parseInt($(".page-number-btn-pagination.active").children().first().val()) + 1;
@@ -1001,7 +967,6 @@
             if($(this).hasClass("disabled") == false){
                 var periode = getPeriodeValue();
                 var cifKey = $(".old-cif-key").val();
-                var accountNumber = $(".old-account-number").val();
                 var status = parseInt($(".old-status").val());
                 var totalPerPage = parseInt($(".old-total-per-page").val());
                 //var pageNumber = $(".page-number-btn-pagination").length;
@@ -1031,25 +996,25 @@
         //var total = $(".old-total-records").val();
         var total = getTotalRecordsWL();
 
-				if(n>=0){
-						if(n>0){
-								var text = "All <strong>"+ n +"</strong> data on this page are selected. ";
-								
-								if(total>n){
-				        		text += "<a onclick='selectAllData("+total+")' style='text-decoration:underline; cursor:pointer;'>Select all <strong>"+total+"</strong> data</a>";
-				        }
-				        
-				        $("#div-info").html(text);
-				        $("#div-info").slideDown(100);
-						} else {	//n = 0
-								if(total>n){
-										var text = "All <strong>"+ n +"</strong> data on this page are selected. <a onclick='selectAllData("+total+")' style='text-decoration:underline; cursor:pointer;'>Select all <strong>"+total+"</strong> data</a>";
-										
-										$("#div-info").html(text);
-				        		$("#div-info").slideDown(100);
-								}
-						}
+		if (n>=0) {
+			if (n>0) {
+				var text = "All <strong>"+ n +"</strong> data on this page are selected. ";
+				
+				if(total>n){
+        		text += "<a onclick='selectAllData("+total+")' style='text-decoration:underline; cursor:pointer;'>Select all <strong>"+total+"</strong> data</a>";
+	        }
+	        
+	        $("#div-info").html(text);
+	        $("#div-info").slideDown(100);
+			} else {	//n = 0
+				if(total>n){
+					var text = "All <strong>"+ n +"</strong> data on this page are selected. <a onclick='selectAllData("+total+")' style='text-decoration:underline; cursor:pointer;'>Select all <strong>"+total+"</strong> data</a>";
+						
+					$("#div-info").html(text);
+        			$("#div-info").slideDown(100);
 				}
+			}
+		}
     }
 
     function hideDivInfo(){
@@ -1103,7 +1068,6 @@
     function ajaxRequestSendEmail(actionString){
         if(getAllCheckedStatus()==1){
             var cifKey = $(".old-cif-key").val();
-            var accountNumber = $(".old-account-number").val();
             var periode = $(".old-periode").val();
             var status = parseInt($(".old-status").val());
 
@@ -1139,14 +1103,12 @@
                         alert(response.message);
                         var periode = getPeriodeValue();
                         var cifKey = $(".old-cif-key").val();
-                        var accountNumber = $(".old-account-number").val();
                         var status = parseInt($(".old-status").val());
                         var totalPerPage = parseInt($(".old-total-per-page").val());
                         var pageNumber = $(".page-number-btn-pagination.active").children().first().val();
 
                         refreshTable(cifKey, periode, status, pageNumber, totalPerPage, getAllCheckedStatus());
-                    }
-                    else {
+                    } else {
                         alert(response.message);
                     }
                 });
@@ -1188,14 +1150,12 @@
                             alert(response.message);
                             var periode = getPeriodeValue();
                             var cifKey = $(".old-cif-key").val();
-                            var accountNumber = $(".old-account-number").val();
                             var status = parseInt($(".old-status").val());
                             var totalPerPage = parseInt($(".old-total-per-page").val());
                             var pageNumber = $(".page-number-btn-pagination.active").children().first().val();
 
-                            refreshTable(cifKey, accountNumber, periode, status, pageNumber, totalPerPage, getAllCheckedStatus());
-                        }
-                        else {
+                            refreshTable(cifKey, periode, status, pageNumber, totalPerPage, getAllCheckedStatus());
+                        } else {
                             alert(response.message);
                         }
                     });
